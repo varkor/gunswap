@@ -1,0 +1,14 @@
+---
+layout: post
+title: Hello World!
+---
+
+h1. {{ page.title }}
+
+p(meta). 6 Feb 2014
+
+Welcome to the Gunswap blog!
+
+Gunswap is not a blog about trading firearms. Sorry Second Amendment enthusiasts! This is a blog about computer science and juggling.
+
+Expect posts soon!
