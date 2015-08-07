@@ -8,13 +8,27 @@ title: gunswap
 	<h1>gunswap</h1>
 	<h4>A web-based juggling animator.</h4>
 
-  	<h2><a href="/gunswap/index.html">Animator</a></h2>
+  	<h2><a href="/gunswap/index.html" class="btn btn-primary large">Run Animator</a></h2>
 
-  	<h2>Blog Posts</h2>
+  	<p>Note: gunswap is developed using Google Chrome and may not work well in other browsers.</p>
+
+  	<ul>
+  		<li><a href="/gunswap/features.html">Feature list</a></li>
+  		<li><a href="/gunswap/syntax.html">Advanced Mode Syntax Guide</a></li>
+  		<li><a href="/gunswap/faq.html">FAQ</a></li>
+  		<li><a href="/gunswap/gallery.html">Gallery</a></li>
+  	</ul>
+
+  	<h4>Blog Posts</h4>
   	<ul>
     {% for post in site.posts %}
      	<li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="../gunswap/{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
+  	</ul>
+
+  	<h4>References</h4>
+  	<ul>
+    	<li>References go here</li>
   	</ul>
 
 </div>

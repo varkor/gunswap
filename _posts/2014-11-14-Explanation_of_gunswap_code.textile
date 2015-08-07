@@ -9,7 +9,7 @@ p(meta). 14 Nov 2014
 
 Here's an explanation of the gunswap code as of v6.0.
 
-h1. Siteswap.js
+h3. Siteswap.js
 
 Siteswap.js is the core siteswap parsing library. It exports 1 function:
 
@@ -17,11 +17,11 @@ Siteswap.js is the core siteswap parsing library. It exports 1 function:
 
 This function takes a set of inputs describing a siteswap and returns a JSON object with calculated properties of the siteswap.
 
-h2. Inputs0
+h4. Inputs
 
-siteswapStr is the only required input and is a siteswap string that adheres to the gunswap notation.
+@siteswapStr@ is the only required input and is a siteswap string that adheres to the gunswap notation.
 
-options is a JSON object containing additional options.
+@options@ is a JSON object containing additional options.
 
 *Examples*
 
@@ -31,27 +31,27 @@ var s3 = CreateSiteswap('441',{beatDuration:.3,dwellRation:.5});
 
 p. You don't need to specify all of the options. Here are the list of options and their defaults.
 
-validationOnly: true 
+@validationOnly: true@
 Passing in false will prevent the generation of prop positions and rotations.
 
-numSteps: 1000
+@numSteps: 1000@
 Defines the size of the prop positions/rotations arrays. A value of 1000 will calculate the props' positions at 1000 equally spaced steps in the full cycle of the pattern.
 
-beatDuration: .2
+@beatDuration: .2@
 Defines the length of a single beat in seconds. A value of .2 will result in a 3 ball cascade with throws lasting .6 seconds.
 
-dwellRatio: .5
+@dwellRatio: .5@
 Defines the amount of time (as a ratio of the beat duration) the a prop is held between throws. The dwell duration cannot exceed the beat duration, hence it's input as a ratio.
 
-props: [{type: 'ball', radius: .05, C: .95}]
+@props: [{type: 'ball', radius: .05, C: .95}]@
 Array of props. Valid types are 'ball', 'club' and 'ring'. Obviously radius and C don't really make any sense for clubs/rings. C if the coefficient of restitution (ie. the bounciness) and is just used for determining the ball path in bounce patterns. If the input array length doesn't match the number of props for the pattern the last object in the array is continuously appended or removed to get a match.
 
-dwellPath: 
+@dwellPath:@
 This requires more explanation - perhaps another blog post soon.
 
-h2. Return object
+h4. Return object
 
-The CreateSiteswap function returns a big JSON object with the following properties.
+The @CreateSiteswap@ function returns a big JSON object with the following properties.
 
 * siteswap
 ** The same siteswap string that was provided as an input.
@@ -106,19 +106,19 @@ The inner workings of this function are an enigma. But the basic flow is:
 # Validate pattern (http://gunswap.blogspot.com/2014/03/siteswap-validation.html)
 # Generate prop positions (no post yet)
 
-h1. SiteswapAnimator.js
+h3. SiteswapAnimator.js
 
 SiteswapAnimator.js handles all the animation. It exports the SiteswapAnimator class.
 
-h2. Constructor
+h4. Constructor
 
-SiteswapAnimator(containerId)
+@SiteswapAnimator(containerId)@
 
-containerId is the div that the canvas will be appended to. The constructor handles all the scene initialization.
+@containerId@ is the div that the canvas will be appended to. The constructor handles all the scene initialization.
 
-h2. Functions
+h4. Functions
 
-go(siteswap[,options])
+@go(siteswap[,options])@
 
 This function runs the animation. siteswap is supposed to be the return object from a call to CreateSiteswap. options is a JSON object containing any animation options. It currently just contains a boolean motionBlur.
 
@@ -132,13 +132,13 @@ All of the above function should be fairly obvious. animationSpeed is a value fr
 
 *Example*
 
-var animator = new SiteswapAnimator('myDiv');
+bc.. var animator = new SiteswapAnimator('myDiv');
 animator.go(SiteswapJS.CreateSiteswap('531'));
 
-h1. index.js
+h3. index.js
 
 This just instantiates a SiteswapAnimator, reads user inputs, and passes the results of a CreateSiteswap call to the animator.
 
-h1. util.js
+h3. util.js
 
 This contains general helper code.

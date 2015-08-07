@@ -7,8 +7,8 @@ h1. {{ page.title }}
 
 p(meta). 25 Mar 2015
 
-Prototype: Bounce GA
-https://github.com/yDgunz/BounceGA
+Prototype of bounce path genetic algorithm code at "https://github.com/yDgunz/BounceGA":https://github.com/yDgunz/BounceGA
+Demo at "http://ydgunz.github.io/BounceGA/":http://ydgunz.github.io/BounceGA/
 
 h1. Overview
 
@@ -18,11 +18,11 @@ h1. Simulating the Bounce Path
 
 In order to simulate the bounce path we first need to define some parameters, primarily the surfaces and the start and end positions of the ball. Assuming the surfaces are flat, we can describe them by a position vector, a normal vector, and a scale. For simplicity we will also assume that the surfaces have an edge parallel to the x-z axis. The figure below (TODO) shows the start position (p0), final position (pT), and a surface described by position vector (Sp), normal vector (Sn) and scale (Ss).
 
-The bounce path begins with the ball leaving p0 with a velocity of v0. Moving forward in time in increments of dt we can calculate a new position p(t+dt) = p(t)+v(t)*dt and a new velocity v(t+dt) = v(t) + g*dt. This applies until we reach the first bounce.
+The bounce path begins with the ball leaving p0 with a velocity of v0. Moving forward in time in increments of dt we can calculate a new position ==p(t+dt) = p(t)+v(t)*dt== and a new velocity ==v(t+dt) = v(t) + g*dt==. This applies until we reach the first bounce.
 
 The first bounce occurs when the ball is colliding with a surface .We can determine if a ball and surface are colliding if the distance from position of the ball to any point on the surface is less than or equal to the radius of the ball. We can describe this condition as (p(t)-Sp) dot Sn <= R. The figure below shows this (TODO).
 
-Assuming an elastic collision, the new velocity will be v(t) - Sn*C*2*v(t) dot Sn, where C is the coefficient of restitution (link). From here we can continue to calculate the new position and velocity as described above until any other collisions occur.
+Assuming an elastic collision, the new velocity will be ==v(t) - Sn*C*2*v(t) dot Sn==, where C is the coefficient of restitution (link). From here we can continue to calculate the new position and velocity as described above until any other collisions occur.
 
 Given the correct velocity v0 we will ultimately end up at pT at time t = T. So this whole problem boils down to finding the correct velocity v0.
 
@@ -71,7 +71,8 @@ p. * p0 - starting position
 
 bc.. maxGenerations, populationSize, mutationChance, mutationScale, initialScale, fitnessThreshold, noGA
 
-p. * maxGenerations - max number of generations to run GA for
+p. 
+* maxGenerations - max number of generations to run GA for
 * populationSize - total size of each generation
 * mutationChance - percentage chance that a member will mutate
 * mutationScale - maximum magnitude of mutation

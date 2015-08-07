@@ -7,6 +7,8 @@ h1. {{ page.title }}
 
 p(meta). 6 Aug 2015
 
+This post is a work in progress.
+
 - Intro
 
 How can you generate all valid siteswaps? First you need to clarify that question with some parameters: the maximum period (P), maximum toss height (let's assume the max toss is the same as the period and that "height" in this context means number of beats and not altitude) and number of props (N). Let's also assume, for now, we're just talking about vanilla siteswap.
