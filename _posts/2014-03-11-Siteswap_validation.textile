@@ -17,38 +17,38 @@ The state array indicates the time at which each prop is going to land. Prop 0 i
 
 Now consider the very basic siteswap 3. We will construct a state array for each beat in the pattern, starting of course when there are no props
 
-bc.. puts "3"
+bc.. 3
 
-puts "BEAT 0 NO PROPS xxx"
-puts "BEAT 1 TOSS 3   xx0"
-puts "BEAT 2 TOSS 3   x01"
-puts "BEAT 3 TOSS 3   012"
-puts "BEAT 4 TOSS 3   120"
-puts "BEAT 5 TOSS 3   201"
-puts "BEAT 6 TOSS 3   012"
-puts "BEAT 7 TOSS 3   120"
-puts "BEAT 8 TOSS 3   201"
-puts "..."
+BEAT 0 NO PROPS xxx
+BEAT 1 TOSS 3   xx0
+BEAT 2 TOSS 3   x01
+BEAT 3 TOSS 3   012
+BEAT 4 TOSS 3   120
+BEAT 5 TOSS 3   201
+BEAT 6 TOSS 3   012
+BEAT 7 TOSS 3   120
+BEAT 8 TOSS 3   201
+...
 
-Notice how beats 3 through 5 could essentially go on forever. This indicates that our siteswap is valid. 
+p. Notice how beats 3 through 5 could essentially go on forever. This indicates that our siteswap is valid. 
 
 Now let's consider siteswap 531 and try to figure out how we can programmatically identify when we've reached a repeatable set of state arrays.
 
-bc.. puts "531"
+531
 
-puts "BEAT 0 TOSS 5 xxxx0"
-puts "BEAT 1 TOSS 3 xx10x"
-puts "BEAT 2 TOSS 1 210xx"
+BEAT 0 TOSS 5 xxxx0
+BEAT 1 TOSS 3 xx10x
+BEAT 2 TOSS 1 210xx
 
 Let's say that a pattern is initialized once all props have been introduced to the pattern and we've completed all of the toss instructions in the siteswap.
 
-bc.. puts "BEAT 3 TOSS 5 10xx2"
-puts "BEAT 4 TOSS 3 0x12x"
-puts "BEAT 5 TOSS 1 012xx"
-puts "BEAT 6 TOSS 5 12xx0"
-puts "BEAT 7 TOSS 3 2x10x"
-puts "BEAT 8 TOSS 1 210xx"
-puts "BEAT 9 TOSS 5 10xx2"
+BEAT 3 TOSS 5 10xx2
+BEAT 4 TOSS 3 0x12x
+BEAT 5 TOSS 1 012xx
+BEAT 6 TOSS 5 12xx0
+BEAT 7 TOSS 3 2x10x
+BEAT 8 TOSS 1 210xx
+BEAT 9 TOSS 5 10xx2
 
 Let's say that the pattern is complete when we've reached the first throw and we're back at the first state. Thus, our repeatable pattern is the state array represented by beats 3 through 8.
 
@@ -56,52 +56,52 @@ Take note that when a pattern ends in a state where all props are landing sequen
 
 Now consider an excited vanilla siteswap like 51. This siteswap cannot be entered from the ground state and that affects its initialization process.
 
-bc.. puts "51"
+51
 
-puts "BEAT 0 TOSS 5 xxxx0"
-puts "BEAT 1 TOSS 1 1xx0x"
+BEAT 0 TOSS 5 xxxx0
+BEAT 1 TOSS 1 1xx0x
 
 At this point we would generally toss prop 2 into the mix, but we can't because prop 1 is landing now and needs to be tossed. Thus, we toss prop 1 and save prop 2 for the next beat.
 
-bc.. puts "BEAT 3 TOSS 5 xx0x1"
-puts "BEAT 4 TOSS 1 20x1x - INIT"
-puts "BEAT 5 TOSS 5 0x1x2"
-puts "BEAT 6 TOSS 1 01x2x"
-puts "BEAT 7 TOSS 5 1x2x0"
-puts "BEAT 8 TOSS 1 12x0x"
-puts "BEAT 9 TOSS 5 2x0x1"
-puts "BEAT 10 TOSS 1 20x1x" 
-puts "BEAT 11 TOSS 5 0x1x2 - COMPLETE"
+BEAT 3 TOSS 5 xx0x1
+BEAT 4 TOSS 1 20x1x - INIT
+BEAT 5 TOSS 5 0x1x2
+BEAT 6 TOSS 1 01x2x
+BEAT 7 TOSS 5 1x2x0
+BEAT 8 TOSS 1 12x0x
+BEAT 9 TOSS 5 2x0x1
+BEAT 10 TOSS 1 20x1x 
+BEAT 11 TOSS 5 0x1x2 - COMPLETE
 
 As you can see above, our repeating pattern is beats 5 through 10.
 
 For synchronous siteswaps we need to extend this state model to include left/right hands. Consider (4,4):
 
-bc.. puts "(4,4)"
-puts "LEFT RIGHT"
-puts "x0   x1"
-puts "02   13 - INIT"
-puts "20   31"
-puts "02   13"
-puts "20   31 - COMPLETE"
+(4,4)
+LEFT RIGHT
+x0   x1
+02   13 - INIT
+20   31 
+02   13
+20   31 - COMPLETE
 
 For multiple jugglers we need to extend this state model to include each juggler. Consider <3p|3p>:
 
-bc.. puts "<3p|3p>"
+<3p|3p>
 
-puts "JUGGLER 1  JUGGLER 2"
-puts "LEFT RIGHT LEFT RIGHT"
-puts "xxx  xxx   xxx  xxx"
-puts "xx1  xxx   xx0  xxx"
-puts "x1x  xx3   x0x  xx2"
-puts "1x5  x3x   0x4  x2x - INIT"
-puts "x5x  3x0   x4x  2x1"
-puts "5x2  x0x   4x3  x1x"
-puts "x2x  0x4   x3x  1x5"
-puts "2x1  x4x   3x0  x5x"
-puts "x1x  4x3   x0x  5x2"
-puts "1x5  x3x   0x4  x2x"
-puts "x5x  3x0   x4x  2x1 - COMPLETE"
+JUGGLER 1  JUGGLER 2
+LEFT RIGHT LEFT RIGHT
+xxx  xxx   xxx  xxx
+xx1  xxx   xx0  xxx
+x1x  xx3   x0x  xx2
+1x5  x3x   0x4  x2x - INIT
+x5x  3x0   x4x  2x1
+5x2  x0x   4x3  x1x
+x2x  0x4   x3x  1x5
+2x1  x4x   3x0  x5x
+x1x  4x3   x0x  5x2
+1x5  x3x   0x4  x2x
+x5x  3x0   x4x  2x1 - COMPLETE
 
 Finally, consider the multiplex pattern 33[33]. For multiplex patterns we will delimit the landing beats using brackets.
 
