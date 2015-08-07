@@ -11,7 +11,7 @@ A siteswap is a string that defines a juggling pattern. Explanation of siteswap 
 
 *Breaking a siteswap down by beats*
 
-Every siteswap can be broken down as instructions for a series of beats. Some siteswaps are very simple to break down: 531 is a 5 toss followed by a 3 followed by a 1. However, consider the siteswap (4,4)(4x,4x) which is a relatively long string, but only contains instructions for 2 beats. Each hand throws a 4, then each hand throws a crossing 4. Things can get even more complicated if you consider multiple jugglers, like the siteswap <[33]|(4x,4x)> which only contains instructions for 1 beat: juggler 0 is doing a multiplexed 3 ball cascade and juggler 2 is doing a synchronous 4-ball crossing fountain.
+Every siteswap can be broken down as instructions for a series of beats. Some siteswaps are very simple to break down: 531 is a 5 toss followed by a 3 followed by a 1. However, consider the siteswap (4,4)(4x,4x) which is a relatively long string, but only contains instructions for 2 beats. Each hand throws a 4, then each hand throws a crossing 4. Things can get even more complicated if you consider multiple jugglers, like the siteswap ==<[33]|(4x,4x)>== which only contains instructions for 1 beat: juggler 0 is doing a multiplexed 3 ball cascade and juggler 2 is doing a synchronous 4-ball crossing fountain.
 
 We need to develop a regex that can split any siteswap string into its component beats. So let's start simple.
 
@@ -26,11 +26,11 @@ First consider some simple vanilla siteswaps like 3, 55500, and b97531 (ok maybe
 @MULTIPLEX = \[(\d|[a-g])+\]@
 
 Multiplex notation allows us to throw multiple props with the same hand on the same beat. This is handled using brackets. So the siteswap 33[33] is a 4 ball version of the 3 ball cascade where the third throw of the pattern is done with 2 balls following the same path. Let's break down this regex:
-* \[ 
+* @\[@ 
 ** starts with a bracket (the bracket needs to be escaped)
-* (\d|[a-g])+ 
+* @(\d|[a-g])+@ 
 ** contains at least 1 of our valid toss expressions
-* \] 
+* @\]@ 
 ** ends with a bracket
 
 *Synchronous*
@@ -53,7 +53,7 @@ This allows us to break even complicated siteswaps into their component beats. C
 
 @PASS = <BEAT(\|BEAT)+>@
 
-Consider the passing siteswap <3p|3p><3|3> which has two jugglers both running a 3 ball cascade and passing on every other beat. In passing patterns each beat is enclosed between "<" and ">" characters, with each juggler's instructions separated by a "|" character. Each juggler's instructions must be a valid beat, thus we can construct a pass regex solely from the BEAT regex.
+Consider the passing siteswap ==<3p|3p><3|3>== which has two jugglers both running a 3 ball cascade and passing on every other beat. In passing patterns each beat is enclosed between "<" and ">" characters, with each juggler's instructions separated by a "|" character. Each juggler's instructions must be a valid beat, thus we can construct a pass regex solely from the BEAT regex.
 
 Now we need to make another extension to our original vanilla siteswap regex, but only for passing patterns. If we have a 2 juggler passing pattern then we need to look for a "p" appended to any vanilla toss:
 

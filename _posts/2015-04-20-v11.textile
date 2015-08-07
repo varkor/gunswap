@@ -17,4 +17,4 @@ As an aside, I bailed on using the minified JS as it was making debugging a real
 
 Right now I'm inspired to go back to the SiteswapGenerator that I wrote a while back. I'd like to bring back the "siteswap explorer" feature in gunswap and perhaps even add a "guess that siteswap" game.
 
-Also added some example GIFs to imgur - http://imgur.com/a/3QcTQ.
+Also added some example GIFs to imgur - "http://imgur.com/a/3QcTQ":http://imgur.com/a/3QcTQ.

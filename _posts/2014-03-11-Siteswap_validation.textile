@@ -103,7 +103,7 @@ x1x  4x3   x0x  5x2
 1x5  x3x   0x4  x2x
 x5x  3x0   x4x  2x1 - COMPLETE
 
-p. Finally, consider the multiplex pattern 33[33]. For multiplex patterns we will delimit the landing beats using brackets.
+p. Finally, consider the multiplex pattern ==33[33]==. For multiplex patterns we will delimit the landing beats using brackets.
 
 bc.. 33[33]
 

@@ -17,7 +17,7 @@ Siteswap.js is the core siteswap parsing library. It exports 1 function:
 
 This function takes a set of inputs describing a siteswap and returns a JSON object with calculated properties of the siteswap.
 
-h2. Inputs
+h2. Inputs0
 
 siteswapStr is the only required input and is a siteswap string that adheres to the gunswap notation.
 
@@ -135,10 +135,10 @@ All of the above function should be fairly obvious. animationSpeed is a value fr
 var animator = new SiteswapAnimator('myDiv');
 animator.go(SiteswapJS.CreateSiteswap('531'));
 
-index.js
+h1. index.js
 
 This just instantiates a SiteswapAnimator, reads user inputs, and passes the results of a CreateSiteswap call to the animator.
 
-util.js
+h1. util.js
 
 This contains general helper code.
