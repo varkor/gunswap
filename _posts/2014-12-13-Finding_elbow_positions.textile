@@ -25,16 +25,16 @@ h1. Solution
 
 Below is how I came up with a function getElbowPosition(S,H,l,w,hand) that returns elbow coordinates given inputs for the shoulder position (S), hand position (H), forearm/bicep length (l), "chicken wing" angle (w) and hand. The hand input is just 0/1 (left/right) indicating which direction the chicken wing angle should rotate. A higher chicken wing angle means your elbows are lifted higher. A chicken wing angle of 0 means the plane created by your shoulder/elbow/hand is parallel to the y axis. The juggler in Fig 1. has a high chicken wing angle.
 
-![Fig 1](/images/elbow_pos_fig1.jpg)
+![Fig 1](/images/elbow_pos_fig1.JPG)
 Fig 1.
 
-!/images/elbow_pos_fig2.jpg!
+![Fig 2](/images/elbow_pos_fig2.JPG)
 Fig 2.
 
-!/images/elbow_pos_fig3.jpg!
+![Fig 3](/images/elbow_pos_fig3.JPG)
 Fig 3.
 
-!/images/elbow_pos_fig4.jpg!
+![Fig 4](/images/elbow_pos_fig4.JPG)
 Fig 4.
 
 Below is a step-by-step explanation of the equations in Fig 4.
