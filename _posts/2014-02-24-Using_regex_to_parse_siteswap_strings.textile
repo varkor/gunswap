@@ -17,13 +17,13 @@ We need to develop a regex that can split any siteswap string into its component
 
 *Vanilla siteswap*
 
-TOSS = \d|[a-o]
+@TOSS = \d|[a-o]@
 
 First consider some simple vanilla siteswaps like 3, 55500, and b97531 (ok maybe this one isn't simple...). All of these siteswaps match the regular expression meaning they can be a digit (\d) or (|) any character "a" through "o" ([a-o]). Note that "a" through "o" really just represent the numbers 10 through 24. We stop at "o" because later on we'll see that "p" is going to be used for something other than representing a toss height.
 
 *Multiplexes*
 
-MULTIPLEX = \[(\d|[a-g])+\]
+@MULTIPLEX = \[(\d|[a-g])+\]@
 
 Multiplex notation allows us to throw multiple props with the same hand on the same beat. This is handled using brackets. So the siteswap 33[33] is a 4 ball version of the 3 ball cascade where the third throw of the pattern is done with 2 balls following the same path. Let's break down this regex:
 * \[ 
@@ -35,7 +35,7 @@ Multiplex notation allows us to throw multiple props with the same hand on the s
 
 *Synchronous*
 
-SYNC = \((TOSS|MULTIPLEX),(TOSS|MULTIPLEX)\)
+@SYNC = \((TOSS|MULTIPLEX),(TOSS|MULTIPLEX)\)@
 
 Now things start to get a little complicated. Consider a synchronous siteswap (4x,4x). This is a synchronous 4-ball fountain where every throw crosses to the other hand. In synchronous siteswap the left side of the comma is the left hand's instructions and the right side is the right hand's instructions. The instructions can be a vanilla toss or a multiplex. Thus, we check for an open and close parentheses with a comma separated vanilla toss or multiplex pattern in between.
 
@@ -43,7 +43,7 @@ You may have noticed that we aren't handling the "x" in (4x,4x). We need to upda
 
 *A valid beat*
 
-BEAT = (TOSS|MULTIPLEX|SYNC)
+@BEAT = (TOSS|MULTIPLEX|SYNC)@
 
 We now have enough regexes to identify valid beats within a pattern, and that's a relatively simple pattern itself. It's simply checking for a vanilla toss, a multiplex, or a sync toss.
 
@@ -51,20 +51,20 @@ This allows us to break even complicated siteswaps into their component beats. C
 
 *Passing*
 
-PASS = <BEAT(\|BEAT)+>
+@PASS = <BEAT(\|BEAT)+>@
 
 Consider the passing siteswap <3p|3p><3|3> which has two jugglers both running a 3 ball cascade and passing on every other beat. In passing patterns each beat is enclosed between "<" and ">" characters, with each juggler's instructions separated by a "|" character. Each juggler's instructions must be a valid beat, thus we can construct a pass regex solely from the BEAT regex.
 
 Now we need to make another extension to our original vanilla siteswap regex, but only for passing patterns. If we have a 2 juggler passing pattern then we need to look for a "p" appended to any vanilla toss:
 
-(\d|[a-g])x?p?
+@(\d|[a-g])x?p?@
 
 If there are three or more jugglers then we need a way of determining which juggler the pass is targeted at. This will be denoted by the number immediately following the "p":
 
-(\d|[a-g])x?(p[1-numJugglers])?
+@(\d|[a-g])x?(p[1-numJugglers])?@
 
 *Putting it all together*
 
-^(PASS)+|(BEAT)+$
+@^(PASS)+|(BEAT)+$@
 
 The final regex checks to see if you have an entire string composed of any number of passing beats or non-passing beats. That's it! Recall that this does not guarantee the validity of a siteswap, it just ensures the string is a valid format. Later on we will use the concept of state diagrams to determine if a siteswap is valid.

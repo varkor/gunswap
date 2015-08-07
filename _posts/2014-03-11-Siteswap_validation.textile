@@ -1,10 +1,132 @@
 ---
 layout: post
-title: test
+title: Siteswap validation
 ---
 
 h1. {{ page.title }}
 
-p(meta). 6 Aug 2015
+p(meta). 11 Mar 2014
 
-Test
+In the previous post we discussed validating the format of a siteswap string using regular expressions. However, this is not sufficient for completely validating a siteswap pattern. We need to ensure that all the throws defined by the pattern can be repeated indefinitely without props ever colliding. This can be achieved using state arrays that are frequently associated with siteswaps.
+
+A state diagram will reflect the position of all props at each beat in the pattern. Consider the following state array:
+
+@01x23@
+
+The state array indicates the time at which each prop is going to land. Prop 0 is landing now. Prop 1 is landing in 1 beat. Prop 2 is landing in 3 beats. Prop 3 is landing in 4 beats. A state diagram should always be the length according to its maximum toss. So if a siteswap has a maximum toss of 7, the state diagrams for that pattern should all be length 7.
+
+Now consider the very basic siteswap 3. We will construct a state array for each beat in the pattern, starting of course when there are no props
+
+bc.. puts "3"
+
+puts "BEAT 0 NO PROPS xxx"
+puts "BEAT 1 TOSS 3   xx0"
+puts "BEAT 2 TOSS 3   x01"
+puts "BEAT 3 TOSS 3   012"
+puts "BEAT 4 TOSS 3   120"
+puts "BEAT 5 TOSS 3   201"
+puts "BEAT 6 TOSS 3   012"
+puts "BEAT 7 TOSS 3   120"
+puts "BEAT 8 TOSS 3   201"
+puts "..."
+
+Notice how beats 3 through 5 could essentially go on forever. This indicates that our siteswap is valid. 
+
+Now let's consider siteswap 531 and try to figure out how we can programmatically identify when we've reached a repeatable set of state arrays.
+
+bc.. puts "531"
+
+puts "BEAT 0 TOSS 5 xxxx0"
+puts "BEAT 1 TOSS 3 xx10x"
+puts "BEAT 2 TOSS 1 210xx"
+
+Let's say that a pattern is initialized once all props have been introduced to the pattern and we've completed all of the toss instructions in the siteswap.
+
+bc.. puts "BEAT 3 TOSS 5 10xx2"
+puts "BEAT 4 TOSS 3 0x12x"
+puts "BEAT 5 TOSS 1 012xx"
+puts "BEAT 6 TOSS 5 12xx0"
+puts "BEAT 7 TOSS 3 2x10x"
+puts "BEAT 8 TOSS 1 210xx"
+puts "BEAT 9 TOSS 5 10xx2"
+
+Let's say that the pattern is complete when we've reached the first throw and we're back at the first state. Thus, our repeatable pattern is the state array represented by beats 3 through 8.
+
+Take note that when a pattern ends in a state where all props are landing sequentially, we'll call this a "ground state" siteswap. This basically just means that you can enter and exit the pattern from the cascade or fountain pattern.
+
+Now consider an excited vanilla siteswap like 51. This siteswap cannot be entered from the ground state and that affects its initialization process.
+
+bc.. puts "51"
+
+puts "BEAT 0 TOSS 5 xxxx0"
+puts "BEAT 1 TOSS 1 1xx0x"
+
+At this point we would generally toss prop 2 into the mix, but we can't because prop 1 is landing now and needs to be tossed. Thus, we toss prop 1 and save prop 2 for the next beat.
+
+bc.. puts "BEAT 3 TOSS 5 xx0x1"
+puts "BEAT 4 TOSS 1 20x1x - INIT"
+puts "BEAT 5 TOSS 5 0x1x2"
+puts "BEAT 6 TOSS 1 01x2x"
+puts "BEAT 7 TOSS 5 1x2x0"
+puts "BEAT 8 TOSS 1 12x0x"
+puts "BEAT 9 TOSS 5 2x0x1"
+puts "BEAT 10 TOSS 1 20x1x" 
+puts "BEAT 11 TOSS 5 0x1x2 - COMPLETE"
+
+As you can see above, our repeating pattern is beats 5 through 10.
+
+For synchronous siteswaps we need to extend this state model to include left/right hands. Consider (4,4):
+
+bc.. puts "(4,4)"
+puts "LEFT RIGHT"
+puts "x0   x1"
+puts "02   13 - INIT"
+puts "20   31"
+puts "02   13"
+puts "20   31 - COMPLETE"
+
+For multiple jugglers we need to extend this state model to include each juggler. Consider <3p|3p>:
+
+bc.. puts "<3p|3p>"
+
+puts "JUGGLER 1  JUGGLER 2"
+puts "LEFT RIGHT LEFT RIGHT"
+puts "xxx  xxx   xxx  xxx"
+puts "xx1  xxx   xx0  xxx"
+puts "x1x  xx3   x0x  xx2"
+puts "1x5  x3x   0x4  x2x - INIT"
+puts "x5x  3x0   x4x  2x1"
+puts "5x2  x0x   4x3  x1x"
+puts "x2x  0x4   x3x  1x5"
+puts "2x1  x4x   3x0  x5x"
+puts "x1x  4x3   x0x  5x2"
+puts "1x5  x3x   0x4  x2x"
+puts "x5x  3x0   x4x  2x1 - COMPLETE"
+
+Finally, consider the multiplex pattern 33[33]. For multiplex patterns we will delimit the landing beats using brackets.
+
+33[33]
+
+JUGGLER 1
+LEFT        RIGHT
+[x][x][x]   [x][x][x] 
+[x][x][0]   [x][x][x] 3
+[x][0][x]   [x][x][1] 3
+[0][x][2,3] [x][1][x] [33] - init
+[x][2,3][x] [1][x][0] 3
+[2,3][x][1] [x][0][x] 3
+[x][1][x]   [0][x][2,3] [33]
+[1][x][0]   [x][2,3][x] 3
+[x][0][x]   [2,3][x][1] 3
+[0][x][2,3] [x][1][x] [33]
+[x][2,3][x] [1][x][x] 3 - complete
+
+So how do you tell when a siteswap is invalid? This occurs when there is a conflict between the number of props landing in a hand and the number of props expected to be tossed by that hand. Consider an invalid siteswap 513.
+
+513
+
+BEAT 0 TOSS 5 [x][x][x][x][0]
+BEAT 1 TOSS 1 [1][x][x][0][x]
+BEAT 2 TOSS 3 [x][x][0,1][x][x]
+BEAT 3 TOSS 5 [x][0,1][x][x][2]
+BEAT 4 TOSS 1 ERROR: EXPECTING 1 PROP, 0 LANDING
