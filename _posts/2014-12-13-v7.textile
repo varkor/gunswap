@@ -1,10 +1,10 @@
 ---
 layout: post
-title: test
+title: v7
 ---
 
 h1. {{ page.title }}
 
-p(meta). 6 Aug 2015
+p(meta). 13 Dec 2014
 
-Test
+The big feature in v7 is moving elbows. See previous blog post for more details about this. Also included some other minor changes, but nothing particularly noteworthy.

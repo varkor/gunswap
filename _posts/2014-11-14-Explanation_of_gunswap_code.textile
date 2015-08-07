@@ -1,10 +1,144 @@
 ---
 layout: post
-title: test
+title: Explanation of gunswap code
 ---
 
 h1. {{ page.title }}
 
-p(meta). 6 Aug 2015
+p(meta). 14 Nov 2014
 
-Test
+Here's an explanation of the gunswap code as of v6.0.
+
+h1. Siteswap.js
+
+Siteswap.js is the core siteswap parsing library. It exports 1 function:
+
+@CreateSiteswap(siteswapStr [, options])@
+
+This function takes a set of inputs describing a siteswap and returns a JSON object with calculated properties of the siteswap.
+
+h2. Inputs
+
+siteswapStr is the only required input and is a siteswap string that adheres to the gunswap notation.
+
+options is a JSON object containing additional options.
+
+*Examples*
+
+bc.. var s1 = CreateSiteswap('531');
+var s2 = CreateSiteswap('51',{validationOnly:true});
+var s3 = CreateSiteswap('441',{beatDuration:.3,dwellRation:.5});
+
+p. You don't need to specify all of the options. Here are the list of options and their defaults.
+
+validationOnly: true 
+Passing in false will prevent the generation of prop positions and rotations.
+
+numSteps: 1000
+Defines the size of the prop positions/rotations arrays. A value of 1000 will calculate the props' positions at 1000 equally spaced steps in the full cycle of the pattern.
+
+beatDuration: .2
+Defines the length of a single beat in seconds. A value of .2 will result in a 3 ball cascade with throws lasting .6 seconds.
+
+dwellRatio: .5
+Defines the amount of time (as a ratio of the beat duration) the a prop is held between throws. The dwell duration cannot exceed the beat duration, hence it's input as a ratio.
+
+props: [{type: 'ball', radius: .05, C: .95}]
+Array of props. Valid types are 'ball', 'club' and 'ring'. Obviously radius and C don't really make any sense for clubs/rings. C if the coefficient of restitution (ie. the bounciness) and is just used for determining the ball path in bounce patterns. If the input array length doesn't match the number of props for the pattern the last object in the array is continuously appended or removed to get a match.
+
+dwellPath: 
+This requires more explanation - perhaps another blog post soon.
+
+h2. Return object
+
+The CreateSiteswap function returns a big JSON object with the following properties.
+
+* siteswap
+** The same siteswap string that was provided as an input.
+
+* validSyntax
+* validPattern
+* multiplex
+* sync
+* pass
+** All of the above are just booleans describing the pattern.
+
+* numJugglers
+* numProps
+* maxHeight
+** More fairly simple properties of the siteswap.
+
+* tosses
+** Array of tosses that occur at each beat. 
+
+* beats
+** Siteswap string broken down into its component beats.
+
+* states
+** State array used for pattern validation. See previous blog post.
+
+* propOrbits
+** For each prop an array of throws and what beat they occur at. 
+
+* propPositions
+** Array of x,y,z positions for each prop.
+
+* jugglerHandPositions
+** Array of x,y,z positions for each juggler's hands.
+
+* jugglers
+** Array of jugglers and their x,z positions (y is assumed to be 0).
+
+* validationOnly
+* numSteps
+* beatDuration
+* dwellDuration
+* props
+* dwellPath
+** The inputs.
+
+* errorMessage
+** If everything worked, this will be undefined. Otherwise this contains any error messages.
+
+The inner workings of this function are an enigma. But the basic flow is:
+
+# Validate syntax (http://gunswap.blogspot.com/2014/02/using-regex-to-parse-siteswap-strings.html)
+# Validate pattern (http://gunswap.blogspot.com/2014/03/siteswap-validation.html)
+# Generate prop positions (no post yet)
+
+h1. SiteswapAnimator.js
+
+SiteswapAnimator.js handles all the animation. It exports the SiteswapAnimator class.
+
+h2. Constructor
+
+SiteswapAnimator(containerId)
+
+containerId is the div that the canvas will be appended to. The constructor handles all the scene initialization.
+
+h2. Functions
+
+go(siteswap[,options])
+
+This function runs the animation. siteswap is supposed to be the return object from a call to CreateSiteswap. options is a JSON object containing any animation options. It currently just contains a boolean motionBlur.
+
+* zoomIn()
+* zoomOut()
+* resize(width,height)
+* updateAnimationSpeed(animationSpeed)
+* updateCameraMode(cameraMode)
+
+All of the above function should be fairly obvious. animationSpeed is a value from 0 to 1 where 1 is full speed and 0 is paused. cameraMode is either 'sky' or 'juggler'.
+
+*Example*
+
+var animator = new SiteswapAnimator('myDiv');
+animator.go(SiteswapJS.CreateSiteswap('531'));
+
+index.js
+
+This just instantiates a SiteswapAnimator, reads user inputs, and passes the results of a CreateSiteswap call to the animator.
+
+util.js
+
+This contains general helper code.

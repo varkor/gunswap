@@ -1,10 +1,15 @@
 ---
 layout: post
-title: test
+title: v8 and v9
 ---
 
 h1. {{ page.title }}
 
-p(meta). 6 Aug 2015
+p(meta). 25 Mar 2015
 
-Test
+Released v8 a while back, but never made the release notes. Just pushed a v9 tonight for some stuff that was sitting around locally. For these two releases the big updates were:
+
+* Changed prop toss/spin orientation syntax. The siteswap now just encodes the number of spins, so you can say "5S3" for 5 club triples, but you can't say "5S3XY" to define the toss/spin orientation. The hand movement string is now used for the prop orientation. You can now add {x,y,z,th} to the end of each hand movement point to define the axis of rotation (x,y,z) and the rotation (th). There's a lot going on with this, and it's kind of half finished, so I'll follow-up in a future blog post.
+* Changed the default prop toss/spin orientation. It now looks much more realistic for clubs. Even if I don't continue on with the ability to change the orientation, I think the default now looks pretty nice.
+* Added a bunch of advanced controls for the dwell path parameters. You can now modify the impact the toss/catch velocities have on the dwell path, including whether or not to match velocities on toss and catch. These parameters are really meaningless to the average user who would just be interested in a good looking animation, so I'm going to see if there are any magic numbers that always look nice.
+* Added more examples

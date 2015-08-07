@@ -1,10 +1,20 @@
 ---
 layout: post
-title: test
+title: v11
 ---
 
 h1. {{ page.title }}
 
-p(meta). 6 Aug 2015
+p(meta). 20 Apr 2015
 
-Test
+In v11 we have:
+
+* Hands for ball-only animations. Use C and T to modify a toss's catch and throw orientation with respect to the hand. For example, 3 ball penguin is represented as "3C{P}" where C indicates a catch modifier and P is the type of the modifier. 3 ball claw is represented as "3C{C}T{C}" where C{C} indicates a claw catch and T{C} indicates a claw toss. "3C{C}" would just be a claw catch followed by a standard, palm-up, toss. Right now we just have claw as an option for toss modification and penguin/claw available for catch. In the future I think fork catches and tosses would be a cool option as well.
+* Dwell ratio modification. Use D{dwellRatio} to modify an individual toss's dwell ratio, overriding the global dwell ratio specified for the whole siteswap. For example, 3D{.9}3D{.4} is a half-shower, you toss one ball over the other by extending the dwell ratio on one side of the pattern.
+* Started using jQueryUI, liking it so far.
+
+As an aside, I bailed on using the minified JS as it was making debugging a real pain, but I think I'll revisit it sometime in the future.
+
+Right now I'm inspired to go back to the SiteswapGenerator that I wrote a while back. I'd like to bring back the "siteswap explorer" feature in gunswap and perhaps even add a "guess that siteswap" game.
+
+Also added some example GIFs to imgur - http://imgur.com/a/3QcTQ.

@@ -1,10 +1,22 @@
 ---
 layout: post
-title: test
+title: v10
 ---
 
 h1. {{ page.title }}
 
-p(meta). 6 Aug 2015
+p(meta). 5 Apr 2015
 
-Test
+Shoulder injury means I'm juggling less, but also means I'm spending more time on the animator. Lots of new stuff!
+
+I've modified the UI (yet again) to consolidate user inputs in a single text area. Definitely less user friendly, but it will allow for more control. Also added a "Basic" inputs menu where you can just specify the siteswap, prop type, hand movement, and pattern height (ie. beat duration). I got rid of all the bootstrap components since I didn't think they were adding much value and that kind of styling really didn't feel appropriate for this kind of application. Things look a bit uglier for the time being, but I think I'd rather take the opportunity to experiment with the styling a bit more on my own.
+
+The main driver behind changing the UI was to incorporate bounce juggling on arbitrary surfaces. I developed a prototype for this (explained in a previous post) and I was able to quickly incorporate it into the animator.
+
+I had to change the bounce syntax a bit. Like before, you use "B" to denote a bounce. Now you can modify the bounce parameters by using curly braces and then specify the number of bounces, bounce surface order and type of bounce. If no modifications are provided, we assume 1 bounce on the first surface using the "lift" bounce. For example "5B{10L}5B{11F}" means throw a 5 for 1 bounce against surface 0 using a lift bounce, then throw a 5 for 1 bounce against surface 1 using a force bounce.
+
+Surfaces are now user defined. As mentioned above, the "Advanced" menu has a text area where you can specify all the inputs (probably need to write a post outlining the full input syntax). The final line(s) are reserved for surfaces which are defined like this "p.x p.y p.z n.x n.y n.z s" where p is the position of the center of the surface, n is the normal, and s is the half-width. The surfaces are assumed to have an edge parallel to the x-z axis. For example, "0 0 0 0 1 0 5" is a simple floor where the center of the surface is at (0,0,0) and the normal (0,1,0) is pointing straight up. The surface is a square with a half-width of 5m, so its actual dimensions are 10m x 10m.
+
+I also added a GIF writer. If you go to the "GIF" menu you'll see a "Generate GIF" button that...you guessed it...generates a GIF. I've been wanting to build this feature for a while, and I basically just reused the code from here: https://dl.dropboxusercontent.com/u/7508542/sandbox/omggif/index.html. The only catch was I had to set the "preserveDrawingBuffer" property to true in the WebGL renderer. Apparently this may cause performance issues on some machines. I haven't seen much degradation on my machine now.
+
+Also beefed up the build process a bit. Added a concat and uglify task in Grunt and modified index.html to reference the minified output. The whole point of this project is to stay sharp on non work related programming and I'm really intrigued by all the Javascript tools out there. I'm on a refactoring/organizing kick right now, and I think I might give Requirejs and Bower a shot.

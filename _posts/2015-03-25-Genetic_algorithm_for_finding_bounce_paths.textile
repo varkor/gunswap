@@ -1,10 +1,84 @@
 ---
 layout: post
-title: test
+title: Genetic algorithm for finding bounce paths
 ---
 
 h1. {{ page.title }}
 
-p(meta). 6 Aug 2015
+p(meta). 25 Mar 2015
 
-Test
+Prototype: Bounce GA
+https://github.com/yDgunz/BounceGA
+
+h1. Overview
+
+Bounce juggling against a set of arbitrary surfaces seemed like a cool feature to add to the gunswap animator. However, given the scope of this addition, it seemed logical to first create a prototype that can calculate a single bounce path given a set of surfaces, start and end position, and a number of other inputs discussed below.
+
+h1. Simulating the Bounce Path
+
+In order to simulate the bounce path we first need to define some parameters, primarily the surfaces and the start and end positions of the ball. Assuming the surfaces are flat, we can describe them by a position vector, a normal vector, and a scale. For simplicity we will also assume that the surfaces have an edge parallel to the x-z axis. The figure below (TODO) shows the start position (p0), final position (pT), and a surface described by position vector (Sp), normal vector (Sn) and scale (Ss).
+
+The bounce path begins with the ball leaving p0 with a velocity of v0. Moving forward in time in increments of dt we can calculate a new position p(t+dt) = p(t)+v(t)*dt and a new velocity v(t+dt) = v(t) + g*dt. This applies until we reach the first bounce.
+
+The first bounce occurs when the ball is colliding with a surface .We can determine if a ball and surface are colliding if the distance from position of the ball to any point on the surface is less than or equal to the radius of the ball. We can describe this condition as (p(t)-Sp) dot Sn <= R. The figure below shows this (TODO).
+
+Assuming an elastic collision, the new velocity will be v(t) - Sn*C*2*v(t) dot Sn, where C is the coefficient of restitution (link). From here we can continue to calculate the new position and velocity as described above until any other collisions occur.
+
+Given the correct velocity v0 we will ultimately end up at pT at time t = T. So this whole problem boils down to finding the correct velocity v0.
+
+We could find v0 by generating random velocities and running the simulation described above until we've found a velocity where the final position in the simulation falls within some minimum success threshold. However, considering a three dimensional bounce path with a small success threshold, this method may take too long to find a solution. It seemed perfect for application of a genetic algorithm.
+
+h1. Genetic Algorithm
+
+A genetic algorithm is an optimization technique that mimics the process of natural selection. The approach described below may be more aptly described as an evolutionary algorithm or differential evolution. I'm not really familiar with the terminology and ultimately whatever you call this heuristic, it got the job done.
+
+Let's first define a population of candidate solutions called G0. Each member of G0 is an initial velocity vector for which we run the simulation described above. The members are assigned a fitness which is the distance from pT the ball ends up if it starts with the member's initial velocity.
+
+If none of the members of G0 have a fitness that falls within the success threshold, we need to generate a new population G1. We do this by selecting members from G0 with a bias towards members with a higher fitness. We then randomly mutate these members and calculate their new fitness values. If none of the members of this new generation, G1, meet the success criteria then we repeat this process until a solution is found, or some limit of attempts is met.
+
+h1. Input Syntax
+
+There are two categories of inputs necessary to run this genetic algorithm. We need the parameters for the bounce path simulation (the fitness function) and the parameters for the genetic algorithm such as population size, max number of generations, etc.
+
+The prototype uses the following input structure:
+
+
+*Fitness Parameters*
+
+bc.. p0.x, p0.y, p0.z, pT.x, pT.y, pT.z, minT, maxT
+R, C
+numBounces[, bounceOrder]
+tossSign, catchSign
+normal.x, normal.y, normal.z, position.x, position.y, position.z, scale - (surface 0)
+...
+normal.x, normal.y, normal.z, position.x, position.y, position.z, scale - (surface N)
+
+p. * p0 - starting position
+* pT - ending position
+* minT - minimum amount of time for bounce path
+* maxT - maximum amount of time for bounce path
+* R - ball radius
+* C - ball coefficient of restitution
+* numBounces - expected number of bounces
+* bounceOrder (optional) - comma separated list of surface indices representing the bounce order. So 1,0 means bounce off surface 1 first, then surface 0
+* tossSign - 1 means the toss is up, -1 means the toss is down, u means it doesn't matter
+* catchSign - 1 means the catch is made while the prop is traveling up, -1 means the catch is made while the prop is traveling down, u means it doesn't matter
+* surfaceNormal - vector for the surface normal
+* surfacePosition - vector for the position of the center of the surface
+* surfaceScale - all surfaces are squares with an edge parallel to the x-z plane, the scale provides the half-width of the square
+
+*GA Parameters*
+
+bc.. maxGenerations, populationSize, mutationChance, mutationScale, initialScale, fitnessThreshold, noGA
+
+p. * maxGenerations - max number of generations to run GA for
+* populationSize - total size of each generation
+* mutationChance - percentage chance that a member will mutate
+* mutationScale - maximum magnitude of mutation
+* initialScale - maximum magnitude of newly generated members
+* fitnessThreshold - maximum distance from pT to be considered a success
+* noGA (optional) - set to 1 to turn off selection by fitness and mutation (ie. iterating through random solutions)
+
+h1. Conclusion
+
+The genetic algorithm has proven to be an adequate solution to the arbitrary bounce path problem. Next steps are to integrate this into the gunswap animator and to figure out the best way of inputting all the necessary parameters. Thus far most of the gunswap inputs have been handled through form elements, but there's a lot here and I may consider reworking some of the existing inputs in favor of a more text based approach like in the bounce path prototype.

@@ -21,7 +21,7 @@ The approach I outline below (which I believe is the same as J2, though I did no
 
 First let's define what many folks should recognize as the classic siteswap state graph. Each node in the graph is a unique "landing schedule" that tells how many props are being caught in a given beat. For vanilla siteswap our graph will have P!/(N!(P-N)!) unique nodes. INSERT IMAGE
 
-The edges of this graph correspond to the actual tosses that make up a siteswap. The edges are directional and can be found using the following algorithm that considers a source node (Ns) and a destination node (Nd). If Ns[0] is 0 then there is no edge between the nodes. Otherwise we create a temporary node that is a copy of the source node (Nt) and set Nt[0] = 0. We then compare the value at each index of Nt and Nd to check for equality. If they are not equal then 
+The edges of this graph correspond to the actual tosses that make up a siteswap. The edges are directional and can be found using the following algorithm that considers a source node (Ns) and a destination node (Nd). First, shift all elements in Ns to the left and add a 0 to the end, so 1011 would become 0110. If the first element of Ns that was shifted out is 0, and the shifted Ns matches Nd, then there is an edge between Ns and Nd with a value of 0. If the first element of Ns that was shifted out is 1, then look for the first instance of a mismatch between the shifted Ns and Nd where the value is 0 in Ns and 1 in Nd. If that is the only mismatch between the two nodes then there is an edge between Ns and Nd with a value of that index plus one. Below is the completed graph. INSERT IMAGE
 
 - Nodes
 - Edges
