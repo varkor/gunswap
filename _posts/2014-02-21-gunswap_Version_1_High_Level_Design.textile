@@ -1,10 +1,35 @@
 ---
 layout: post
-title: test
+title: gunswap Version 1 High Level Design
 ---
 
 h1. {{ page.title }}
 
-p(meta). 6 Aug 2015
+p(meta). 21 Feb 2014
 
-Test
+For the past year or so I've been tinkering around with "gswap" - my very own siteswap animator. I think now is time to actually produce something. For starters I'm changing the name to "gunswap" because it sounds cooler.
+
+My goal for version 1 is to produce a simple siteswap animator with 3D graphics and support for synchronous and multiplex siteswaps. This does seem a bit lofty, but I've been tinkering with a siteswap parsing algorithm that I think can support all of these things. Plus the graphics are going to be easy using Three.js.
+
+Out of scope for version 1 is any kind of throw modifier, passing patterns, different kinds of props, etc. I'd like to consider these features when doing the initial design, but they are not going to be present in the first version.
+
+Ok, onto some high level design...
+
+The initial version is going to be a single html page and single js file (plus the necessary js files for Three.js and jQuery and whatever else I end up requiring). No need for a database-backed application quite yet.
+
+Here's a simple overview of what I'm thinking:
+
+*function Siteswap(siteswap)*
+*Takes in a siteswap string as an input
+*Parses the siteswap and sets the following properties
+**numJugglers
+**numProps
+**maxThrowHeight
+**states - array describing the state of every prop during each beat
+**tossArr - array describing all the tosses in the siteswap
+**propOrbits - array of each prop's path throughout the pattern
+*If the siteswap is invalid we'll throw an appropriate error
+**function Animator()**
+*Instantiates a Siteswap object based on some input from a UI.
+*Generate the prop orbits as an array of positions over time.
+*Run an animation function that draws a scene to the browser looping over the prop orbits. The smaller the step size for the prop orbits the better.
