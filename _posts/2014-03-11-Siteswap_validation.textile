@@ -34,15 +34,15 @@ p. Notice how beats 3 through 5 could essentially go on forever. This indicates 
 
 Now let's consider siteswap 531 and try to figure out how we can programmatically identify when we've reached a repeatable set of state arrays.
 
-531
+bc.. 531
 
 BEAT 0 TOSS 5 xxxx0
 BEAT 1 TOSS 3 xx10x
 BEAT 2 TOSS 1 210xx
 
-Let's say that a pattern is initialized once all props have been introduced to the pattern and we've completed all of the toss instructions in the siteswap.
+p. Let's say that a pattern is initialized once all props have been introduced to the pattern and we've completed all of the toss instructions in the siteswap.
 
-BEAT 3 TOSS 5 10xx2
+bc.. BEAT 3 TOSS 5 10xx2
 BEAT 4 TOSS 3 0x12x
 BEAT 5 TOSS 1 012xx
 BEAT 6 TOSS 5 12xx0
@@ -50,20 +50,20 @@ BEAT 7 TOSS 3 2x10x
 BEAT 8 TOSS 1 210xx
 BEAT 9 TOSS 5 10xx2
 
-Let's say that the pattern is complete when we've reached the first throw and we're back at the first state. Thus, our repeatable pattern is the state array represented by beats 3 through 8.
+p. Let's say that the pattern is complete when we've reached the first throw and we're back at the first state. Thus, our repeatable pattern is the state array represented by beats 3 through 8.
 
 Take note that when a pattern ends in a state where all props are landing sequentially, we'll call this a "ground state" siteswap. This basically just means that you can enter and exit the pattern from the cascade or fountain pattern.
 
 Now consider an excited vanilla siteswap like 51. This siteswap cannot be entered from the ground state and that affects its initialization process.
 
-51
+bc.. 51
 
 BEAT 0 TOSS 5 xxxx0
 BEAT 1 TOSS 1 1xx0x
 
-At this point we would generally toss prop 2 into the mix, but we can't because prop 1 is landing now and needs to be tossed. Thus, we toss prop 1 and save prop 2 for the next beat.
+p. At this point we would generally toss prop 2 into the mix, but we can't because prop 1 is landing now and needs to be tossed. Thus, we toss prop 1 and save prop 2 for the next beat.
 
-BEAT 3 TOSS 5 xx0x1
+bc.. BEAT 3 TOSS 5 xx0x1
 BEAT 4 TOSS 1 20x1x - INIT
 BEAT 5 TOSS 5 0x1x2
 BEAT 6 TOSS 1 01x2x
@@ -73,11 +73,11 @@ BEAT 9 TOSS 5 2x0x1
 BEAT 10 TOSS 1 20x1x 
 BEAT 11 TOSS 5 0x1x2 - COMPLETE
 
-As you can see above, our repeating pattern is beats 5 through 10.
+p. As you can see above, our repeating pattern is beats 5 through 10.
 
 For synchronous siteswaps we need to extend this state model to include left/right hands. Consider (4,4):
 
-(4,4)
+bc.. (4,4)
 LEFT RIGHT
 x0   x1
 02   13 - INIT
@@ -85,9 +85,9 @@ x0   x1
 02   13
 20   31 - COMPLETE
 
-For multiple jugglers we need to extend this state model to include each juggler. Consider <3p|3p>:
+p. For multiple jugglers we need to extend this state model to include each juggler. Consider <3p|3p>:
 
-<3p|3p>
+bc.. <3p|3p>
 
 JUGGLER 1  JUGGLER 2
 LEFT RIGHT LEFT RIGHT
@@ -103,9 +103,9 @@ x1x  4x3   x0x  5x2
 1x5  x3x   0x4  x2x
 x5x  3x0   x4x  2x1 - COMPLETE
 
-Finally, consider the multiplex pattern 33[33]. For multiplex patterns we will delimit the landing beats using brackets.
+p. Finally, consider the multiplex pattern 33[33]. For multiplex patterns we will delimit the landing beats using brackets.
 
-33[33]
+bc.. 33[33]
 
 JUGGLER 1
 LEFT        RIGHT
@@ -121,9 +121,9 @@ LEFT        RIGHT
 [0][x][2,3] [x][1][x] [33]
 [x][2,3][x] [1][x][x] 3 - complete
 
-So how do you tell when a siteswap is invalid? This occurs when there is a conflict between the number of props landing in a hand and the number of props expected to be tossed by that hand. Consider an invalid siteswap 513.
+p. So how do you tell when a siteswap is invalid? This occurs when there is a conflict between the number of props landing in a hand and the number of props expected to be tossed by that hand. Consider an invalid siteswap 513.
 
-513
+bc.. 513
 
 BEAT 0 TOSS 5 [x][x][x][x][0]
 BEAT 1 TOSS 1 [1][x][x][0][x]

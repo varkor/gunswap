@@ -1,10 +1,31 @@
 ---
 layout: post
-title: test
+title: v4.0
 ---
 
 h1. {{ page.title }}
 
-p(meta). 6 Aug 2015
+p(meta). 25 Aug 2014
 
-Test
+Haven't posted in a while. Here's what we've got in v4.0:
+
+* Separated siteswap parsing/validation from animation and created a Siteswap.js library that can be used both in the browser and on the server with nodejs. I'm hoping to work on some fancier documentation for the Siteswap.js library so that other folks can use it if they are interested.
+* Started using Grunt, Mocha and Travis CI for testing purposes. Grunt is a great Javascript task runner that I really only have set up to watch for changes in the source files and kick off tests, but there's a lot of opportunity there for streamlining some of the development processes. Mocha is the testing framework, pretty simple. Travis CI is an awesome, free, CI platform that runs all my tests on every push to GitHub. 
+* I'm really only testing some of the basic siteswap parsing functionality, but I'm pretty happy with the tests so far. I'm not sure how to go about testing the functionality that generates the prop positions/rotations, will have to give that some more thought. Also need to consider how to test the UI. I've played with Watir in the past, but that's all ruby...
+* Spent a bunch of time playing with a Mongo/NodeJS/Express/EmbeddedJS stack. Considering adding a DB backend so that people can save their patterns. There's a lot to this though and right now I'm still more interested in just the raw animator.
+* Fixed that synchronous halving issue by adding (0,0) to each beat.
+* Introduced a new modifier "S" to change the number of prop rotations in the air and the orientation of the throw and spins (only really applicable to clubs and rings). 
+* The syntax is ==<toss>S<# of spins><toss orientation><spin orientation>==
+* The # of spins represents full 360 degree rotations. This is optional and if it is not present the # of spins will default to floor(==<toss>==/2). So a toss of 5 would be 2 spins, a toss of 3 would be 1 spin, a toss of 1 would be 0 spins, etc.
+* The toss and spin orientation are defined according to Varkor's notation. http://juggle.wikia.com/wiki/Rotation_notation
+* Examples:
+* 4S04S01S0 - 441 with all flats
+* 5S1XY - 5 cascade with 1 helicopter spin thrown with the club facing in the direction of the positive x axis
+* Number of bounces is now set the same way as the number of spins, ie. 5B1
+* Bounce type now defaults to lift bouncing if you don't specify the bounce type. Thus 5B1 and 5B1L are the same.
+* Changed the pass modifier to be a capital "P".
+* Added a grass texture map to the floor. Easy and fun. 
+* Removed the siteswap explorer and local storage saving option. I think the siteswap explorer deserves to be a separate project and I'll address the saving option when I put a DB backend on this thing.
+* I know some folks have had trouble with the animator, mostly in Opera and older browser versions. I think I'm going to add a 2-D HTML5 canvas option that doesn't rely on Three.js or WebGL. I've also got a handful of bugs that I should make an effort to log since I haven't actually addressed them yet.
+
+I'm not sure what's next. I know the prop orientation stuff could be way better - more natural angles for club tosses, smoother rotations while the prop is in the dwell path (right now it just jumps), documentation of the syntax. But I'm itching to work on the dwell paths, specifically because I want to try my hand at cubic bezier interpolation. I'd also like to consider more realistic animation of the juggler, but there are a lot of things to consider there. That's a bit more intense on the animation side of things than I think I'm capable of right now.

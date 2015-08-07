@@ -1,10 +1,39 @@
 ---
 layout: post
-title: test
+title: gunswap v1.0 released!
 ---
 
 h1. {{ page.title }}
 
-p(meta). 6 Aug 2015
+p(meta). 11 Mar 2014
 
-Test
+I am happy to announce that after way too much tinkering and half-complete little scripts, gunswap v1.0 is complete!
+
+All you can do right now is enter a standard siteswap pattern and see it animated in the browser (I've done all my development in Chrome). There is support for vanilla, multiplex, synchronous and passing siteswaps. That lays the groundwork for a lot of cool improvements - what's next?
+
+Version 2 will probably focus mostly on more inputs for configurable parameters. The trick is going to be determining which are the most important. Here are some general categories of input parameters and/or new features:
+
+* Synchronous siteswap "halving" issue. Consider adding (0,0) in between each beat to make throws match up with async siteswap better.
+* Environment
+** Gravity
+** Beat duration
+** Dwell ratio
+* Props
+** Cosmetic properties like size, shape and color
+*** Consider options for different types of props like clubs and rings
+** Coefficient of restitution (if we implement bounce juggling)
+* Toss modifiers
+** Force/lift bounce
+** Rotation of prop (more useful for things like clubs and rings - not really noticeable with balls)
+* Dwell path
+** Current dwell path is just a circle which has options for center, radius and points of catch/release
+** Totally custom dwell paths could be made using some kind of bezier curve algorithm. http://bseth99.github.io/projects/animate/2-bezier-curves.html looks like it has some potential and I think this is how Juggling Lab does it
+* Passing
+** Define juggler positions
+** Allow jugglers to move
+* Animation
+** 2D option
+** Lighting and shading
+** Animation speed
+* Database backend
+** Not sure how interested in this I am, it would be nice to be able to save patterns, but this seems like it would shift the focus of the project

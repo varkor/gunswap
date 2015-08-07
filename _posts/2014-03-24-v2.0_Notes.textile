@@ -1,10 +1,25 @@
 ---
 layout: post
-title: test
+title: v2.0 Notes
 ---
 
 h1. {{ page.title }}
 
-p(meta). 6 Aug 2015
+p(meta). 24 Mar 2014
 
-Test
+Reached a good stopping point for v2.0 faster than I expected. I added the following:
+
+* User inputs for beat duration, dwell duration, prop radius and prop coefficient of restitution (ie. bounciness)
+* Support for bounce juggling
+** Add any number of "B" characters to a single toss to make it a bounce (the number of bounces is the number of B's). Must follow each B with an L (lift), F (force), HL (hyperlift) or HF (hyperforce). So 5 ball lift bounce pattern would be "5BL"
+** http://jugglinglab.sourceforge.net/html/ssnotation.html explains the bounce notation I used
+* Animated jugglers
+* First person camera option
+* User input for animation speed
+
+Priorities for the next version:
+
+* Synchronous siteswap "halving" issue
+* Alternative dwell paths like reverse cascade, windmill and mills mess
+* Alternative props like clubs and rings
+Soon I'd like to write a post about my dwell path and flight path interpolation algorithms. Definitely needs explaining because the code is starting to look a little messy.

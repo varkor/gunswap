@@ -1,10 +1,10 @@
 ---
 layout: post
-title: test
+title: v6.0
 ---
 
 h1. {{ page.title }}
 
-p(meta). 6 Aug 2015
+p(meta). 14 Nov 2014
 
-Test
+Quick turnaround on this one, though not much to report. Another new layout for the UI along with the ability to change color/type of individual props. Also added motion blur.

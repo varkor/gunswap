@@ -1,10 +1,26 @@
 ---
 layout: post
-title: test
+title: v3.0 Released
 ---
 
 h1. {{ page.title }}
 
-p(meta). 6 Aug 2015
+p(meta). 6 Apr 2014
 
-Test
+Just published version 3.0. First thought - what's the difference between 3.1 and 4.0? We have this same debate at work and it seems like there's no real solid answer. I think if my next stopping point only includes some bug fixes and refactoring, then it's 3.1. If it's got a bunch of big new features and (yet another) UI change, then I'll call it 4.0.
+
+Anyways, version 3.0 has the following new features:
+
+* Improved UI layout
+* Added ring and club prop types
+* Added reverse cascade and shower hand movements
+* Added a "siteswap explorer" that generates vanilla siteswap patterns based on some user inputs
+* Added a save feature using the browser's local storage, so the data wont' persist across browsers and/or machines
+
+I think the next stopping point is going to be a version 3.1 with a bunch of refactoring and bug fixes. There's still that synchronous siteswap "halving" issue and the siteswap explorer doesn't support non-numeric characters. It also kind of gives the user a smoking gun to choke their browser if they generate siteswaps for 8+ beats and max throw height. The help functionality is really lacking, and I think that's because I'm still not sure who the target audience is for this software. If you know your siteswaps and have used something like juggling lab before, then I think this all should be fairly intuitive. If you don't know siteswaps then chances are you're really not interested in this app anyway, so perhaps I don't even try to help that kind of user?
+
+The code is really starting to look like spaghetti. I guess that's the downside to constantly experimenting with different ideas, and not thinking of how the whole thing fits together. I think before I start working on big features for v4.0 (things like customized dwell paths, number of prop rotations in flight, defining where each juggler is in passing patterns) I need to take a step back and re-assess the whole design.
+
+And testing...that didn't last long... I do like the Qunit tests for the siteswap validation component. I think there's some real value to be had there, and I should make sure I spend some time getting that back up to speed. I don't think there's really any sense in automated testing for any of the animation stuff, I'm not even sure how that would work.
+
+Lots of cool stuff here, I'm really pleased with how far this has come since I decided to take the release process more serious. Each release has had its flaws, but actually drawing a line in the sand and saying "this is version 3" feels good.
