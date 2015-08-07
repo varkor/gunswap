@@ -1,0 +1,33 @@
+---
+layout: post
+title: Siteswap graphs
+---
+
+h1. {{ page.title }}
+
+p(meta). 6 Aug 2015
+
+- Intro
+
+How can you generate all valid siteswaps? First you need to clarify that question with some parameters: the maximum period (P), maximum toss height (let's assume the max toss is the same as the period and that "height" in this context means number of beats and not altitude) and number of props (N). Let's also assume, for now, we're just talking about vanilla siteswap.
+
+A naive, brute force, approach would be to test the validity of every string of length P with siteswap characters 0 through P (an array of P+1). However, this approach would have to validate (P+1)^P siteswaps, which quickly becomes unfeasible.
+
+A second approach that I gave some thought to was to approach the problem from the standpoint of prop orbits. If a prop orbit is a sequence of states where a state is defined as a location and beat, then you can pretty easily come up with all possible prop orbits given the parameters discussed above. A prop orbit could be expressed as [{beat:0,hand:left},{beat:3,hand:right}]. To find siteswaps with max period P and number of props N, you need to find all combinations of N prop orbits where the beat value in a state cannot exceed P-1 (if you include a beat 0). I worked on a generator that used this approach but it was still somewhat slow.
+
+The approach I outline below (which I believe is the same as J2, though I did not use that as a reference) is much faster and reliable.
+
+- Introduction of the graph
+
+First let's define what many folks should recognize as the classic siteswap state graph. Each node in the graph is a unique "landing schedule" that tells how many props are being caught in a given beat. For vanilla siteswap our graph will have P!/(N!(P-N)!) unique nodes. INSERT IMAGE
+
+The edges of this graph correspond to the actual tosses that make up a siteswap. The edges are directional and can be found using the following algorithm that considers a source node (Ns) and a destination node (Nd). If Ns[0] is 0 then there is no edge between the nodes. Otherwise we create a temporary node that is a copy of the source node (Nt) and set Nt[0] = 0. We then compare the value at each index of Nt and Nd to check for equality. If they are not equal then 
+
+- Nodes
+- Edges
+- Finding closed circuits
+- Excited vs. ground
+- Multiplex
+- Sync
+- D3 visualization
+- Integration into gunswap
