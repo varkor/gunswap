@@ -20,16 +20,16 @@ The initial version is going to be a single html page and single js file (plus t
 Here's a simple overview of what I'm thinking:
 
 *function Siteswap(siteswap)*
-*Takes in a siteswap string as an input
-*Parses the siteswap and sets the following properties
-**numJugglers
-**numProps
-**maxThrowHeight
-**states - array describing the state of every prop during each beat
-**tossArr - array describing all the tosses in the siteswap
-**propOrbits - array of each prop's path throughout the pattern
-*If the siteswap is invalid we'll throw an appropriate error
-**function Animator()**
-*Instantiates a Siteswap object based on some input from a UI.
-*Generate the prop orbits as an array of positions over time.
-*Run an animation function that draws a scene to the browser looping over the prop orbits. The smaller the step size for the prop orbits the better.
+* Takes in a siteswap string as an input
+* Parses the siteswap and sets the following properties
+** numJugglers
+** numProps
+** maxThrowHeight
+** states - array describing the state of every prop during each beat
+** tossArr - array describing all the tosses in the siteswap
+** propOrbits - array of each prop's path throughout the pattern
+* If the siteswap is invalid we'll throw an appropriate error
+*function Animator()*
+* Instantiates a Siteswap object based on some input from a UI.
+* Generate the prop orbits as an array of positions over time.
+* Run an animation function that draws a scene to the browser looping over the prop orbits. The smaller the step size for the prop orbits the better.
