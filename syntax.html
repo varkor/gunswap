@@ -23,5 +23,33 @@ surfaceN</code>
 </p>
 
 <p>
-<code>beatDuration</code> - beat duration in seconds.
+<code>beatDuration</code> - beat duration in seconds. Higher beat duration means higher throws.
+</p>
+
+<p>
+<code>dwellRatio</code> - dwell ratio, must be between 0 and 1. Higher dwell ratio means the prop stays in the hand longer, and means shorter throws.
+</p>
+
+<p>
+<code>propType</code> - prop type. Options are "ball", "club" and "ring".
+</p>
+
+<p>
+<code>color</code> - prop color.
+</p>
+
+<p>
+<code>radius</code> - prop radius in m (only applies to balls).
+</p>
+
+<p>
+<code>C</code> - prop coefficient of restitution - basically how bouncy the prop is. Must be between 0 and 1, where 1 is 100% elastic bounces.
+</p>
+
+<p>
+<code>dwellPath</code> - customizable dwell path. Positions in the dwell path are wrapped in parentheses with the y and z components optional. Positions are in cm relative to the center of the juggler with the positive direction moving to the outside. The first position is the catch position, the last is the throw, and all points in between are passed through using a bezier cubic spline. Multiple paths are delimited by periods. So <code>(30)(10).(10)(30)</code> is a classic half shower hand movement where the first dwell path (<code>(30)(10)</code>) indicates the prop is caught 30 cm outside the center and then thrown 10 cm outside the center (ie. an inside throw). The second path (<code>(10)(30)</code>) indicates an outside throw.
+</p>
+
+<p>
+Still need to finish the rest.
 </p>
