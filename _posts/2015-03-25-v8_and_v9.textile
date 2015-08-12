@@ -3,7 +3,7 @@ layout: post
 title: v8 and v9
 ---
 
-h1. {{ page.title }}
+h3. {{ page.title }}
 
 p(meta). 25 Mar 2015
 

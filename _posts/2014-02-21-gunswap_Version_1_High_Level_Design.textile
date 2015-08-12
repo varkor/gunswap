@@ -3,7 +3,7 @@ layout: post
 title: gunswap Version 1 High Level Design
 ---
 
-h1. {{ page.title }}
+h3. {{ page.title }}
 
 p(meta). 21 Feb 2014
 

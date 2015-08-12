@@ -3,18 +3,18 @@ layout: post
 title: Genetic algorithm for finding bounce paths
 ---
 
-h1. {{ page.title }}
+h3. {{ page.title }}
 
 p(meta). 25 Mar 2015
 
 Prototype of bounce path genetic algorithm code at "https://github.com/yDgunz/BounceGA":https://github.com/yDgunz/BounceGA
 Demo at "http://ydgunz.github.io/BounceGA/":http://ydgunz.github.io/BounceGA/
 
-h1. Overview
+h4. Overview
 
 Bounce juggling against a set of arbitrary surfaces seemed like a cool feature to add to the gunswap animator. However, given the scope of this addition, it seemed logical to first create a prototype that can calculate a single bounce path given a set of surfaces, start and end position, and a number of other inputs discussed below.
 
-h1. Simulating the Bounce Path
+h4. Simulating the Bounce Path
 
 In order to simulate the bounce path we first need to define some parameters, primarily the surfaces and the start and end positions of the ball. Assuming the surfaces are flat, we can describe them by a position vector, a normal vector, and a scale. For simplicity we will also assume that the surfaces have an edge parallel to the x-z axis. The figure below (TODO) shows the start position (p0), final position (pT), and a surface described by position vector (Sp), normal vector (Sn) and scale (Ss).
 
@@ -28,7 +28,7 @@ Given the correct velocity v0 we will ultimately end up at pT at time t = T. So 
 
 We could find v0 by generating random velocities and running the simulation described above until we've found a velocity where the final position in the simulation falls within some minimum success threshold. However, considering a three dimensional bounce path with a small success threshold, this method may take too long to find a solution. It seemed perfect for application of a genetic algorithm.
 
-h1. Genetic Algorithm
+h4. Genetic Algorithm
 
 A genetic algorithm is an optimization technique that mimics the process of natural selection. The approach described below may be more aptly described as an evolutionary algorithm or differential evolution. I'm not really familiar with the terminology and ultimately whatever you call this heuristic, it got the job done.
 
@@ -36,7 +36,7 @@ Let's first define a population of candidate solutions called G0. Each member of
 
 If none of the members of G0 have a fitness that falls within the success threshold, we need to generate a new population G1. We do this by selecting members from G0 with a bias towards members with a higher fitness. We then randomly mutate these members and calculate their new fitness values. If none of the members of this new generation, G1, meet the success criteria then we repeat this process until a solution is found, or some limit of attempts is met.
 
-h1. Input Syntax
+h4. Input Syntax
 
 There are two categories of inputs necessary to run this genetic algorithm. We need the parameters for the bounce path simulation (the fitness function) and the parameters for the genetic algorithm such as population size, max number of generations, etc.
 
@@ -80,6 +80,6 @@ p.
 * fitnessThreshold - maximum distance from pT to be considered a success
 * noGA (optional) - set to 1 to turn off selection by fitness and mutation (ie. iterating through random solutions)
 
-h1. Conclusion
+h4. Conclusion
 
 The genetic algorithm has proven to be an adequate solution to the arbitrary bounce path problem. Next steps are to integrate this into the gunswap animator and to figure out the best way of inputting all the necessary parameters. Thus far most of the gunswap inputs have been handled through form elements, but there's a lot here and I may consider reworking some of the existing inputs in favor of a more text based approach like in the bounce path prototype.

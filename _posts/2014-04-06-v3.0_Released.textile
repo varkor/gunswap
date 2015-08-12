@@ -3,7 +3,7 @@ layout: post
 title: v3.0 Released
 ---
 
-h1. {{ page.title }}
+h3. {{ page.title }}
 
 p(meta). 6 Apr 2014
 

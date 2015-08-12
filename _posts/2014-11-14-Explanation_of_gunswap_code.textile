@@ -3,13 +3,13 @@ layout: post
 title: Explanation of gunswap code
 ---
 
-h1. {{ page.title }}
+h3. {{ page.title }}
 
 p(meta). 14 Nov 2014
 
 Here's an explanation of the gunswap code as of v6.0.
 
-h3. Siteswap.js
+h4. Siteswap.js
 
 Siteswap.js is the core siteswap parsing library. It exports 1 function:
 
@@ -17,7 +17,7 @@ Siteswap.js is the core siteswap parsing library. It exports 1 function:
 
 This function takes a set of inputs describing a siteswap and returns a JSON object with calculated properties of the siteswap.
 
-h4. Inputs
+*Inputs*
 
 @siteswapStr@ is the only required input and is a siteswap string that adheres to the gunswap notation.
 
@@ -49,7 +49,7 @@ Array of props. Valid types are 'ball', 'club' and 'ring'. Obviously radius and 
 @dwellPath:@
 This requires more explanation - perhaps another blog post soon.
 
-h4. Return object
+*Return object*
 
 The @CreateSiteswap@ function returns a big JSON object with the following properties.
 
@@ -106,17 +106,17 @@ The inner workings of this function are an enigma. But the basic flow is:
 # Validate pattern (http://gunswap.blogspot.com/2014/03/siteswap-validation.html)
 # Generate prop positions (no post yet)
 
-h3. SiteswapAnimator.js
+h4. SiteswapAnimator.js
 
 SiteswapAnimator.js handles all the animation. It exports the SiteswapAnimator class.
 
-h4. Constructor
+*Constructor*
 
 @SiteswapAnimator(containerId)@
 
 @containerId@ is the div that the canvas will be appended to. The constructor handles all the scene initialization.
 
-h4. Functions
+*Functions*
 
 @go(siteswap[,options])@
 
@@ -135,10 +135,10 @@ All of the above function should be fairly obvious. animationSpeed is a value fr
 bc.. var animator = new SiteswapAnimator('myDiv');
 animator.go(SiteswapJS.CreateSiteswap('531'));
 
-h3. index.js
+h4. index.js
 
 This just instantiates a SiteswapAnimator, reads user inputs, and passes the results of a CreateSiteswap call to the animator.
 
-h3. util.js
+h4. util.js
 
 This contains general helper code.

@@ -3,11 +3,11 @@ layout: post
 title: Finding elbow positions
 ---
 
-h1. {{ page.title }}
+h3. {{ page.title }}
 
 p(meta). 13 Dec 2014
 
-h1. Intro
+h4. Intro
 
 One of the glaring issues with the gunswap animator was the lack of elbow movement. It's fairly easy to calculate the hand positions of a juggler throughout a pattern; they are well defined by the dwell path of the pattern, and when a prop is in flight the hand is just moving towards the next catch. The elbows are a bit trickier though. My goal was to define a function that will return the elbow position given the hand position.
 
@@ -21,7 +21,7 @@ Unfortunately I was having a hard time following the Juggling Lab code, and didn
 
 Up to this point I had been trying to work out complicated solutions considering the individual rotation angles of the shoulder and elbow. However, thinking about the the problem with one degree of freedom - the "chicken wing angle" - was the key to unlocking the solution.
 
-h1. Solution
+h4. Solution
 
 Below is how I came up with a function getElbowPosition(S,H,l,w,hand) that returns elbow coordinates given inputs for the shoulder position (S), hand position (H), forearm/bicep length (l), "chicken wing" angle (w) and hand. The hand input is just 0/1 (left/right) indicating which direction the chicken wing angle should rotate. A higher chicken wing angle means your elbows are lifted higher. A chicken wing angle of 0 means the plane created by your shoulder/elbow/hand is parallel to the y axis. The juggler in Fig 1. has a high chicken wing angle.
 

@@ -1,0 +1,18 @@
+---
+layout: post
+title: v12
+---
+
+h3. {{ page.title }}
+
+p(meta). 11 Aug 2015
+
+It's been a while since an update, but it's also been a busy summer. In real life juggling I attended my first IJA, which was great and I'm looking forward to attending more.
+
+Earlier this year I took a hiatus from the animator and returned to my siteswap generator. This led to SiteswapGraph.js which I created a prototype for at "http://ydgunz.github.io/gunswap/SiteswapGraph.html":http://ydgunz.github.io/gunswap/SiteswapGraph.html. In v12 I've integrated this into the "Explorer" tab of the animator. The generator supports vanilla, multiplex and synchronous siteswaps. I discuss the technical implementation of the generator in a separate blog post.
+
+The other feature I've added is the ability to set the juggler positions and rotations, which really only makes a difference for passing patterns. This is done through the advanced mode editor, which now has a page dedicated to explaining the syntax. Adjusting the rotation is pretty buggy right now.
+
+I've also migrated the blog from Blogger to Github pages as part of an effort to have a more official project page. Github Pages uses Jekyll which seems pretty cool, but I haven't set up to run locally on my Windows machine, so I'm constantly pushing updates to Github to see any aesthetic changes. Not the ideal way to build the site, but I'm happy where it's at now and adding new pages and blog posts should be easy moving forward. 
+
+Next up I'm going to focus on fixing issues with juggler rotation. When you rotate a juggler anything other than 180 degrees the elbows get all messed up. There's also some issues with the dwell path interpolation that is more noticable with more complicated patterns, you'll see the hands making very exagerated throws. I think all of this can be addressed by trying to simplify a lot of the coordinate system transformation going on.

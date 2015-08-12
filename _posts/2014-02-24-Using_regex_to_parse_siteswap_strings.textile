@@ -3,7 +3,7 @@ layout: post
 title: Using regex to parse siteswap strings
 ---
 
-h1. {{ page.title }}
+h3. {{ page.title }}
 
 p(meta). 24 Feb 2014
 

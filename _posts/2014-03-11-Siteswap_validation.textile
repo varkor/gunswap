@@ -3,7 +3,7 @@ layout: post
 title: Siteswap validation
 ---
 
-h1. {{ page.title }}
+h3. {{ page.title }}
 
 p(meta). 11 Mar 2014
 
