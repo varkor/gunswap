@@ -3,7 +3,7 @@
 
 <head>
 	
-	<script src="js/gunswap.min.js"></script>
+	<script src="build/gunswap.min.js"></script>
 	<!--<script src="js/lib/jquery-1.10.2.min.js"></script>
 	<script src="js/lib/jquery-ui.min.js"></script>
 	<script src="js/lib/omggif.js"></script>
@@ -70,7 +70,7 @@
 			</div>
 			<div>
 				<label for="prop">Prop</label>
-				<select id="prop" onchange="updateAdvancedInputsFromBasic();">
+				<select id="prop" onchange="updateAdvancedInputsFromBasic();">					
 					<option value="ball">Ball</option>
 					<option value="club">Club</option>
 					<option value="ring">Ring</option>
@@ -88,11 +88,13 @@
 			</div>
 			<div>
 				<label for="beatDuration">Height</label>
-				<input id="beatDuration" type="range" min=".05" max=".5" value=".24" step=".005" onchange="updateAdvancedInputsFromBasic();"></input>
+				<input id="beatDuration" type="range" min=".05" max=".5" value=".3" step=".005" onchange="updateAdvancedInputsFromBasic();"></input>
 			</div>		    
 		</div>
 		<div id="advanced">
-			<button onclick="go();">Juggle!</button><br/><br/>
+			<button onclick="go();">Juggle!</button>
+			 | <a href="/gunswap/syntax.html">Syntax Help</a>
+			<br/><br/>
 			<div id="errorMessage"></div>
 			<textarea id="inputsAdvanced" rows="8" cols="40" onchange="updateAdvancedLabels();" style="font-family:monospace;font-size:150%;"></textarea><br/><br/>
 			<div>siteswap: <span id="lblSiteswap"></span></div>

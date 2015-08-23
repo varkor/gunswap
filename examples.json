@@ -85,7 +85,13 @@
 			]
 		},{
 			"name": "Spin modifier - flats and doubles",
-			"siteswap": "3S03S2",
+			"siteswap": "3S{0}3S{2}",
+			"props": [{"type":"club","color":"red","radius":".05","C":".97"}]
+		},{
+			"name": "Spin modifier - lazies",
+			"siteswap": "3S{0.75}",
+			"beatDuration": "0.4",
+			"dwellPath": "(40,-40,50)(0)",
 			"props": [{"type":"club","color":"red","radius":".05","C":".97"}]
 		},{
 			"name": "Dwell modifier - 4 ball sync shower",

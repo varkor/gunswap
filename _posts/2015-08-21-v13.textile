@@ -1,0 +1,23 @@
+---
+layout: post
+title: v13
+---
+
+h3. {{ page.title }}
+
+p(meta). 21 Aug 2015
+
+The big new feature in v13 is the ability to configure club toss orientation and number of spins. The spin modifier now requires brackets to specify the toss orientation and number of spins. See the advanced mode syntax page for more information. This also means that passing patterns with clubs look way better now as the jugglers are all throwing the clubs the correct way for their rotation.
+
+Also fixed the elbow issue when rotating by anything other than 180 degrees, and the erratic hand issue in sync siteswaps like (4,4). Upped the number of frames calculated per beat duration (in order to have smoother animations at lower speeds) and increaed the number of vertices in the club mesh. These should make the animator generally look better and don't seem to impact performance on my machine too much.
+
+Below are some GIF's demonstrating the configurable club toss orientation and number of spins.
+
+3 club lazies - notice how the clubs do a 3/4 spin so they are caught pointing down
+!/gunswap/images/3_club_lazies.gif!
+
+2-count passing (v13)
+!/gunswap/images/2_count_passing.gif!
+
+2-count passing (v12) - notice all the clubs rotating the same direction
+!/gunswap/images/2_count_passing_old.gif!
