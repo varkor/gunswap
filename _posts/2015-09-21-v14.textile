@@ -1,0 +1,17 @@
+---
+layout: post
+title: v14
+---
+
+h3. {{ page.title }}
+
+p(meta). 21 Sept 2015
+
+Some new things in v14:
+
+* New, mobile friendly, layout. Includes the ability to rotate using touch, no pinch zoom yet though.
+* 2's are now held. You can make them active by putting an A after the toss, so "42A3" would be 423 with an active 2.
+* Added a feature to show the orbit/path of each prop.
+* Fixed some issues with empty hand path and rotation.
+
+Should put some example GIF's here at some point...
