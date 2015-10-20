@@ -1,0 +1,13 @@
+---
+layout: post
+title: v15
+---
+
+h3. {{ page.title }}
+
+p(meta). 20 Oct 2015
+
+Updates in v15:
+
+* Improved multiplex dwell paths - all props now held in the same position.
+* Added ability to specify custom camera position.
