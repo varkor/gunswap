@@ -11,3 +11,4 @@ Updates in v15:
 
 * Improved multiplex dwell paths - all props now held in the same position.
 * Added ability to specify custom camera position.
+* Added back ability to set siteswap in query string - ie. http://ydgunz.github.io/gunswap/animator.html?siteswap=531

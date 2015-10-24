@@ -15,8 +15,8 @@
 			"siteswap": "[54]24"
 		},{
 			"name": "Passing siteswap - 4 count passing",
-			"props": [{"type":"club","color":"red","radius":".05","C":".97"}],
 			"siteswap": "<3|3><3|3><3|3><3P|3P>",
+			"props": [{"type":"club","color":"red","radius":".05","C":".97"}],
 			"jugglers": [{"position": {"x": 0, "z": 0}, "rotation": 0},{"position": {"x": 0, "z": -2}, "rotation": 3.14}]
 		},{
 			"name": "Clubs - 5 club cascade",
@@ -86,13 +86,7 @@
 			]
 		},{
 			"name": "Spin modifier - flats and doubles",
-			"siteswap": "3S{0}3S{2}",
-			"props": [{"type":"club","color":"red","radius":".05","C":".97"}]
-		},{
-			"name": "Spin modifier - lazies",
-			"siteswap": "3S{0.75}",
-			"beatDuration": "0.4",
-			"dwellPath": "(40,-40,50)(0)",
+			"siteswap": "3S03S2",
 			"props": [{"type":"club","color":"red","radius":".05","C":".97"}]
 		},{
 			"name": "Dwell modifier - 4 ball sync shower",
