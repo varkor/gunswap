@@ -50,18 +50,21 @@
 	#examplesMenu a:hover {
 		text-decoration: underline;
 	}
-	#siteswapsList {
+	#generatedSiteswaps a {
+		display: block;
+		text-align: center;
+	}
+	.list {
 		list-style: none;
 		font-size: 20px;
 		padding-left: 0px;
 	}
-	#siteswapsList a {
-		display: block;
-		text-align: center;
+	.list a {
+		display: inline;
 		border-bottom: 1px solid #999;
 		text-decoration: none;
 	}
-	#siteswapsList a:hover {
+	.list a:hover {
 		background-color: #ddd;
 	}
 	#nav ul {
@@ -103,6 +106,13 @@
 		border-color: #ebccd1;
 		background-color: #f2dede;
 	}
+	.success {
+		color: white;
+		background-color: #5cb85c; 
+	}
+	.deleteLink {
+		color: #a94442;
+	}
 	
 	</style>
 
@@ -117,6 +127,7 @@
 			<li><a id="pattern" onclick="displayMenu('pattern');"><span class="glyphicon glyphicon-cog"></span> Controls</a></li>
 			<li><a id="animatorControls" onclick="displayMenu('animatorControls');"><span class="glyphicon glyphicon-facetime-video"></span> Camera</a></li>
 			<li><a id="explorer" onclick="displayMenu('explorer');"><span class="glyphicon glyphicon-search"></span> Explorer</a></li>
+			<li><a id="saved" onclick="displayMenu('saved');"><span class="glyphicon glyphicon-save"></span> Saved</a></li>
 			<li><a id="about" onclick="displayMenu('about');"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
 		</ul>
 	</div>
@@ -124,7 +135,7 @@
 	</div>
 	<div id="patternMenu" class="controlDiv">
 		<!-- BASIC -->
-		<button onclick="go();">Juggle!</button>
+		<button onclick="go();">Juggle!</button>		
 		<br/><br/>
 		<div id="errorMessage" class="alert" style="display:none;">
 			<span class="glyphicon glyphicon-exclamation-sign"></span>	
@@ -174,7 +185,15 @@
 			<div>matchVelocity: <span id="lblMatchVelocity"></span>, dwellCatchScale: <span id="lblDwellCatchScale"></span>, dwellTossScale: <span id="lblDwellTossScale"></span>, emptyTossScale: <span id="lblEmptyTossScale"></span>, emptyCatchScale: <span id="lblEmptyCatchScale"></span>,
 			armAngle: <span id="lblArmAngle"></span></div>
 			<div><span id="lblSurfaces"></span></div>
-		</div>
+		</div>			
+		<div>
+			<label for="savedName">Save As</label>
+			<input id="savedName" class="control" placeholder="Name"></input>
+			<button onclick="saveCurrentSiteswap();">Save</button>
+			<span id="saveSuccess" class="success" style="display:none;">Saved!</span>
+		</div>	
+		<p>URL for this pattern (note: URL only preserves siteswap, beat duration, props and dwell path.)</p>
+		<a id="saveURL"></a>
 	</div>
 	<div id="animatorControlsMenu" class="controlDiv">								
 		
@@ -246,16 +265,23 @@
 				</div>				
 			</div>
 		</div>
-		<div id="siteswaps" style="width:100%;overflow-y:auto;">
-			<ul id="siteswapsList">
+		<div id="generatedSiteswaps" style="width:100%;overflow-y:auto;">
+			<ul id="siteswapsList" class="list">
 			</ul>
+		</div>
+	</div>
+	<div id="savedMenu" class="controlDiv">				
+		<div id="savedSiteswaps" style="width:100%;overflow-y:auto;">
+			<ul id="savedList" class="list"></ul>
 		</div>
 	</div>
 	<div id="aboutMenu" class="controlDiv">
 		<p>Learn more about gunswap at the <a href="/gunswap/index.html">project page</a>.</p>
 		<p>Check out the <a href="/gunswap/SiteswapGraph.html">siteswap graph animator</a>.</p>
 		<p>Below are some examples, click one to play the animation.</p>
-		<ul id="examplesList"></ul>
+		<div id="exampleSiteswaps" style="width:100%;overflow-y:auto;">
+			<ul id="examplesList" class="list"></ul>
+		</div>
 	</div>	
 </div>
 
@@ -263,5 +289,16 @@
 </div>
 
 </body>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67932517-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
 </html>
