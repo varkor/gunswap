@@ -1,0 +1,14 @@
+---
+layout: post
+title: Is this thing still on?
+---
+
+h3. {{ page.title }}
+
+p(meta). 08 Aug 2016
+
+Haven't touched this project in a long time! It's been quite a busy year, both professionally and personally, so I haven't had the time to dig in to what's become a bit of a complicated codebase. I'm also not really sure where to go from here, need to review my old notes to see what ideas I had.
+
+I just published v17. Fixed a few bugs with dwell paths for synchronous patterns and added a save feature that uses the browsers localStorage.
+
+More to come soon!
